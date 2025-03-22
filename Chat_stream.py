@@ -13,8 +13,8 @@ def get_gemini_client():
     """
     Retrieves and validates the Gemini API client.
     """
-    gemini_api_key = os.getenv("GEMINI_API_KEY")
-    gemini_api_url = os.getenv("GEMINI_API_URL")
+    gemini_api_key = os.getenv("gemini_api_key")
+    gemini_api_url = os.getenv("gemini_api_url")
     if not gemini_api_key or not gemini_api_url:
         raise ValueError("GEMINI_API_KEY or GEMINI_API_URL environment variable not set.")
     return OpenAI(api_key=gemini_api_key, base_url=gemini_api_url)
@@ -57,7 +57,7 @@ def main():
     Example usage of the Gemini streaming chat.
     """
     user_question = "使用Docker compose 搭配 Dockerfile搭建容器，若要添加環境變數寫在哪比較好"
-    
+
     messages = [
         {"role": "system", "content": ""},
         {"role": "user", "content": user_question}
