@@ -1,0 +1,156 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  /*
+  display: flex;
+  justify-content: center;
+  */
+  align-items: center;
+  background-color: #f5f2eb; /* 米色背景，像和紙 */
+  color: #594f4f; /* 深灰褐色文字 */
+  font-family: "Noto Sans JP", "Noto Serif JP", sans-serif; /* 日文字體 */
+}
+/* Container styles */
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #d7d2cb; /* 淺色邊框 */
+  border-radius: 8px; /* 柔和的圓角 */
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05); /* 輕微陰影 */
+}
+
+/* Text styles */
+.text {
+  margin-bottom: 30px;
+}
+
+.text h1 {
+  margin-bottom: 10px;
+  color: #847a73; /* 暖灰色標題 */
+  font-weight: 500; /* 稍輕的字重，符合日式風格 */
+  letter-spacing: 1px; /* 字間距 */
+}
+.text p {
+  margin-top: 10px;
+  color: #7a7270; /* 柔和的灰色 */
+  line-height: 1.7; /* 增加行高 */
+}
+
+/* Buttons container */
+.buttons {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 10px 0;
+  border-radius: 4px; /* 減少圓角，更符合簡約風格 */
+  transition: all 0.3s ease; /* 平滑過渡 */
+  font-family: inherit;
+}
+
+.btn-stop {
+  background-color: #d69090; /* 柔和的淺紅色 */
+  color: #ffffff;
+  border: 1px solid #d69090;
+  cursor: pointer;
+}
+.btn-start {
+  background-color: #7a9e9f; /* 淺藍綠色，類似傳統青瓷 */
+  color: #ffffff;
+  border: 1px solid #7a9e9f;
+  cursor: pointer;
+}
+
+/* Log container styles */
+#log_container {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border-top: 1px solid #d7d2cb; /* 使用淺色邊框 */
+  background-color: #faf8f3; /* 稍微淺一點的背景 */
+  border-radius: 4px;
+}
+
+#log {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #594f4f;
+}
+
+a {
+  color: #8e7a5b; /* 茶色超連結 */
+  text-decoration: none; /* 去掉下劃線 */
+  transition: color 0.3s; /* 平滑過渡 */
+}
+a:hover {
+  color: #b19171; /* 淺茶色 */
+  text-decoration: underline; /* 滑鼠懸停時顯示下劃線 */
+}
+
+.btn-start:active {
+  background-color: #6a8e8f; /* 按下時稍微變暗 */
+}
+
+.btn-stop:active {
+  background-color: #c68080; /* 按下時稍微變暗 */
+}
+
+.disabled {
+  background-color: #e5e0da; /* 淺灰褐色 */
+  color: #a1a1a1;
+  border-color: #d3cec7;
+  cursor: not-allowed;
+}
+
+pre {
+  border: 1px solid #d7d2cb; /* 淺色邊框 */
+  padding: 10px;
+  background-color: #f0ece6; /* 淺米色背景 */
+  border-radius: 4px;
+  overflow: auto;
+  color: #594f4f; /* 深灰褐色文字 */
+  font-family: "Garamond", serif;
+}
+
+/* 語言選擇下拉選單 */
+#languageSelect {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #d7d2cb; /* 統一邊框色調 */
+  background-color: #faf8f3; /* 稍微淺一點的背景 */
+  color: #594f4f; /* 深灰褐色文字 */
+  cursor: pointer;
+  margin-left: 15px;
+  appearance: none; /* 移除原生下拉箭頭 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23847a73' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-right: 30px; /* 為箭頭留出空間 */
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#languageSelect:hover {
+  border-color: #b19171; /* 淺茶色 */
+  box-shadow: 0 0 5px rgba(142, 122, 91, 0.3); /* 柔和的茶色陰影 */
+}
+
+#languageSelect:focus {
+  outline: none;
+  border-color: #8e7a5b; /* 茶色 */
+  box-shadow: 0 0 5px rgba(142, 122, 91, 0.3); /* 柔和的茶色陰影 */
+}
+
+#languageSelect option {
+  background-color: #faf8f3; /* 稍微淺一點的背景 */
+  color: #594f4f; /* 深灰褐色文字 */
+}

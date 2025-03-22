@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Speech Recognition in Python</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/index1.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>會議記錄工具</h1>
+      <br />
+      <div id="speechContainer">
+        <br />
+        <h3>Step 1 - 上傳聲音</h3>
+        <form method="post" enctype="multipart/form-data" action="/fileUpload">
+          <input type="file" name="file" />
+          <br />
+          <h3>Step 4 - 轉成文字</h3>
+          <input type="submit" id="submitButton" value="轉檔" />
+        </form>
+      </div>
+    </div>
+    <div id="log_container">
+      {% if transcript != "" %}
+      <div id="speechTranscriptContainer">
+        <h1>Results</h1>
+        <p id="speechText">{{ transcript }}</p>
+      </div>
+      {% endif %} {% if summary != "" %}
+      <div id="summaryContainer">
+        <h1>Summary</h1>
+        <pre>{{ summary|safe }}</pre>
+      </div>
+      {% endif %}
+    </div>
+    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+    <script src="{{ url_for('static', filename='js/WebAudioRecorder.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>

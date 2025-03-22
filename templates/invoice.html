@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI</title>
+    <style>
+      body {
+        font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f9fc;
+        color: #333;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+      }
+      .subtitle {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+      }
+      .upload-section {
+        background-color: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+      }
+      .upload-area {
+        border: 2px dashed #3498db;
+        border-radius: 6px;
+        padding: 3rem 1rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 1rem;
+      }
+      .upload-area:hover {
+        background-color: #f1f9ff;
+      }
+      .upload-icon {
+        font-size: 3rem;
+        color: #3498db;
+        margin-bottom: 1rem;
+      }
+      .upload-text {
+        color: #7f8c8d;
+      }
+      .file-info {
+        display: none;
+        margin-top: 1rem;
+        padding: 0.5rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+      }
+      .button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .button:hover {
+        background-color: #2980b9;
+      }
+      .button:disabled {
+        background-color: #bdc3c7;
+        cursor: not-allowed;
+      }
+      .hidden {
+        display: none;
+      }
+      .results-section {
+        background-color: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        display: none;
+      }
+      .result-tabs {
+        display: flex;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 1rem;
+      }
+      .tab {
+        padding: 0.8rem 1.5rem;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+      }
+      .tab.active {
+        border-bottom: 2px solid #3498db;
+        color: #3498db;
+        font-weight: bold;
+      }
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+      .image-preview {
+        max-width: 100%;
+        max-height: 300px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+      }
+      .text-result {
+        padding: 1rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+        min-height: 150px;
+        white-space: pre-wrap;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 2rem;
+        color: #7f8c8d;
+        font-size: 0.9rem;
+      }
+      .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border-left-color: #3498db;
+        animation: spin 1s linear infinite;
+        margin: 1rem auto;
+        display: none;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .error-message {
+        color: #e74c3c;
+        text-align: center;
+        margin-top: 1rem;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>圖片文字解析工具</h1>
+        <p class="subtitle">上傳圖片，透過AI自動解析其中的文字內容</p>
+      </header>
+
+      <div class="upload-section">
+        <div id="uploadArea" class="upload-area">
+          <div class="upload-icon">⬆️</div>
+          <p class="upload-text">點擊或拖曳圖片至此處上傳</p>
+          <p class="upload-text">支援 PNG, JPG, JPEG 格式</p>
+          <input
+            type="file"
+            id="fileInput"
+            accept="image/png, image/jpeg"
+            style="display: none"
+          />
+        </div>
+
+        <div id="fileInfo" class="file-info">
+          <p>檔案名稱: <span id="fileName">-</span></p>
+          <p>檔案大小: <span id="fileSize">-</span></p>
+        </div>
+
+        <div id="errorMessage" class="error-message">
+          上傳失敗，請稍後再試或聯繫系統管理員
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem">
+          <button id="uploadButton" class="button" disabled>
+            開始解析文字
+          </button>
+        </div>
+      </div>
+
+      <div id="resultsSection" class="results-section">
+        <div class="result-tabs">
+          <div class="tab active" data-tab="preview">圖片預覽</div>
+          <div class="tab" data-tab="text">解析結果</div>
+        </div>
+
+        <div id="previewTab" class="tab-content active">
+          <img
+            id="imagePreview"
+            class="image-preview"
+            src="/api/placeholder/400/300"
+            alt="圖片預覽"
+          />
+        </div>
+
+        <div id="textTab" class="tab-content">
+          <div class="spinner" id="loadingSpinner"></div>
+          <div class="text-result" id="textResult">解析結果將顯示在這裡...</div>
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem">
+          <button id="copyButton" class="button">複製文字</button>
+          <button id="downloadButton" class="button" style="margin-left: 1rem">
+            下載 TXT
+          </button>
+          <button
+            id="resetButton"
+            class="button"
+            style="margin-left: 1rem; background-color: #e74c3c"
+          >
+            重新上傳
+          </button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>© 2025 圖片文字解析工具 - 使用先進LLM技術</p>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const uploadArea = document.getElementById("uploadArea");
+        const fileInput = document.getElementById("fileInput");
+        const fileInfo = document.getElementById("fileInfo");
+        const fileName = document.getElementById("fileName");
+        const fileSize = document.getElementById("fileSize");
+        const uploadButton = document.getElementById("uploadButton");
+        const resultsSection = document.getElementById("resultsSection");
+        const imagePreview = document.getElementById("imagePreview");
+        const textResult = document.getElementById("textResult");
+        const copyButton = document.getElementById("copyButton");
+        const downloadButton = document.getElementById("downloadButton");
+        const resetButton = document.getElementById("resetButton");
+        const loadingSpinner = document.getElementById("loadingSpinner");
+        const errorMessage = document.getElementById("errorMessage");
+        const tabs = document.querySelectorAll(".tab");
+        const tabContents = document.querySelectorAll(".tab-content");
+
+        let currentFile = null;
+
+        // 上傳區域點擊觸發檔案選擇
+        uploadArea.addEventListener("click", function () {
+          fileInput.click();
+        });
+
+        // 拖曳文件處理
+        uploadArea.addEventListener("dragover", function (e) {
+          e.preventDefault();
+          uploadArea.style.backgroundColor = "#f1f9ff";
+        });
+
+        uploadArea.addEventListener("dragleave", function () {
+          uploadArea.style.backgroundColor = "";
+        });
+
+        uploadArea.addEventListener("drop", function (e) {
+          e.preventDefault();
+          uploadArea.style.backgroundColor = "";
+
+          if (e.dataTransfer.files.length > 0) {
+            const file = e.dataTransfer.files[0];
+            if (file.type.match("image/jpeg") || file.type.match("image/png")) {
+              handleFile(file);
+            } else {
+              alert("請上傳 PNG 或 JPG 格式的圖片");
+            }
+          }
+        });
+
+        // 選擇檔案後的處理
+        fileInput.addEventListener("change", function () {
+          if (fileInput.files.length > 0) {
+            handleFile(fileInput.files[0]);
+          }
+        });
+
+        // 處理上傳的檔案
+        function handleFile(file) {
+          // 儲存當前檔案
+          currentFile = file;
+
+          // 隱藏錯誤訊息
+          errorMessage.style.display = "none";
+
+          // 顯示檔案資訊
+          fileInfo.style.display = "block";
+          fileName.textContent = file.name;
+
+          // 格式化檔案大小
+          const size = file.size;
+          if (size < 1024) {
+            fileSize.textContent = size + " B";
+          } else if (size < 1024 * 1024) {
+            fileSize.textContent = (size / 1024).toFixed(2) + " KB";
+          } else {
+            fileSize.textContent = (size / (1024 * 1024)).toFixed(2) + " MB";
+          }
+
+          // 啟用上傳按鈕
+          uploadButton.disabled = false;
+
+          // 圖片預覽
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            imagePreview.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+
+        // 處理上傳按鈕點擊事件
+        uploadButton.addEventListener("click", function () {
+          if (!currentFile) {
+            return;
+          }
+
+          // 顯示結果區域
+          resultsSection.style.display = "block";
+
+          // 切換到文字結果標籤
+          switchTab("text");
+
+          // 顯示載入中
+          loadingSpinner.style.display = "block";
+          textResult.style.display = "none";
+
+          // 建立 FormData 並添加檔案
+          const formData = new FormData();
+          formData.append("image", currentFile);
+
+          // 發送到後端 API
+          fetch("/invoice", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("伺服器回應錯誤: " + response.status);
+              }
+              return response.text();
+            })
+            .then((data) => {
+              // 處理成功回應
+              loadingSpinner.style.display = "none";
+              textResult.style.display = "block";
+              textResult.textContent = data;
+            })
+            .catch((error) => {
+              // 處理錯誤
+              console.error("上傳發生錯誤:", error);
+              loadingSpinner.style.display = "none";
+              textResult.style.display = "block";
+              textResult.textContent = "解析過程中發生錯誤，請稍後再試。";
+              errorMessage.style.display = "block";
+            });
+        });
+
+        // 處理標籤切換
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            const tabId = this.getAttribute("data-tab");
+            switchTab(tabId);
+          });
+        });
+
+        function switchTab(tabId) {
+          // 更新標籤狀態
+          tabs.forEach((tab) => {
+            if (tab.getAttribute("data-tab") === tabId) {
+              tab.classList.add("active");
+            } else {
+              tab.classList.remove("active");
+            }
+          });
+
+          // 更新內容區域
+          tabContents.forEach((content) => {
+            if (content.id === tabId + "Tab") {
+              content.classList.add("active");
+            } else {
+              content.classList.remove("active");
+            }
+          });
+        }
+
+        // 複製文字
+        copyButton.addEventListener("click", function () {
+          const text = textResult.textContent;
+          navigator.clipboard
+            .writeText(text)
+            .then(function () {
+              alert("文字已複製到剪貼簿");
+            })
+            .catch(function (err) {
+              console.error("無法複製文字: ", err);
+            });
+        });
+
+        // 下載為TXT
+        downloadButton.addEventListener("click", function () {
+          const text = textResult.textContent;
+          const blob = new Blob([text], { type: "text/plain" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "解析結果.txt";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+
+        // 重置
+        resetButton.addEventListener("click", function () {
+          // 重置檔案輸入
+          fileInput.value = "";
+          fileInfo.style.display = "none";
+          errorMessage.style.display = "none";
+          currentFile = null;
+
+          // 禁用上傳按鈕
+          uploadButton.disabled = true;
+
+          // 隱藏結果區域
+          resultsSection.style.display = "none";
+
+          // 重置圖片預覽
+          imagePreview.src = "/api/placeholder/400/300";
+
+          // 重置文字結果
+          textResult.textContent = "解析結果將顯示在這裡...";
+
+          // 切換回預覽標籤
+          switchTab("preview");
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,180 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  /*
+    display: flex;
+    justify-content: center;
+    */
+  align-items: center;
+  background-color: #f7f7f7; /* 淺灰色背景 */
+  color: #333333; /* 深灰色文字 */
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; /* 簡約現代字體 */
+}
+/* Container styles */
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  text-align: center;
+  background-color: #ffffff; /* 白色容器 */
+  border-radius: 10px; /* 圓角 */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* 輕微陰影 */
+}
+
+/* Text styles */
+.text {
+  margin-bottom: 35px;
+}
+
+.text h1 {
+  margin-bottom: 15px;
+  color: #2e2e2e; /* 標題顏色 */
+  font-weight: 600; /* 稍微加粗 */
+  letter-spacing: -0.5px; /* 緊湊的字間距 */
+  font-size: 28px;
+}
+.text p {
+  margin-top: 15px;
+  color: #555555; /* 中灰色段落文字 */
+  line-height: 1.6; /* 舒適的行高 */
+  font-size: 16px;
+}
+
+/* Buttons container */
+.buttons {
+  margin-bottom: 25px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 15px;
+  margin: 12px 5px;
+  border-radius: 6px; /* 適中的圓角 */
+  font-weight: 500; /* 稍微加粗 */
+  transition: all 0.2s ease-in-out; /* 平滑過渡 */
+  letter-spacing: 0.3px; /* 稍微增加字間距 */
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 輕微陰影 */
+}
+
+.btn-stop {
+  background-color: #e25c5c; /* 現代感紅色 */
+  color: white;
+  cursor: pointer;
+}
+.btn-start {
+  background-color: #4aa5d4; /* 北歐藍 */
+  color: white;
+  cursor: pointer;
+}
+
+/* Log container styles */
+#log_container {
+  width: 100%;
+  max-width: 800px;
+  margin: 25px auto;
+  padding: 25px;
+  background-color: #ffffff; /* 白色背景 */
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06); /* 輕微陰影 */
+}
+
+#log {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #444444;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+a {
+  color: #4aa5d4; /* 北歐藍超連結 */
+  text-decoration: none;
+  transition: color 0.2s;
+  font-weight: 500;
+}
+a:hover {
+  color: #3487b3; /* 深一點的藍色 */
+  text-decoration: none; /* 保持無下劃線 */
+  border-bottom: 1px solid #3487b3; /* 改用底部邊框 */
+}
+
+.btn-start:hover {
+  background-color: #3d8fb9; /* 懸停時變暗 */
+  transform: translateY(-2px); /* 輕微上浮效果 */
+}
+
+.btn-stop:hover {
+  background-color: #cc4c4c; /* 懸停時變暗 */
+  transform: translateY(-2px); /* 輕微上浮效果 */
+}
+
+.btn-start:active {
+  transform: translateY(0); /* 按下時回復 */
+}
+
+.btn-stop:active {
+  transform: translateY(0); /* 按下時回復 */
+}
+
+.disabled {
+  background-color: #e0e0e0; /* 淺灰色 */
+  color: #999999;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+pre {
+  border: none;
+  padding: 16px;
+  background-color: #f3f3f3; /* 非常淺的灰色背景 */
+  border-radius: 8px;
+  overflow: auto;
+  color: #333333;
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* 語言選擇下拉選單 */
+#languageSelect {
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0; /* 淺灰色邊框 */
+  background-color: #ffffff; /* 白色背景 */
+  color: #444444;
+  cursor: pointer;
+  margin-left: 15px;
+  appearance: none; /* 移除原生下拉箭頭 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%234aa5d4' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 35px; /* 為箭頭留出空間 */
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+#languageSelect:hover {
+  border-color: #bdbdbd; /* 深一點的灰色 */
+  box-shadow: 0 0 0 3px rgba(74, 165, 212, 0.1); /* 輕微藍色陰影 */
+}
+
+#languageSelect:focus {
+  outline: none;
+  border-color: #4aa5d4; /* 北歐藍 */
+  box-shadow: 0 0 0 3px rgba(74, 165, 212, 0.2); /* 輕微藍色陰影 */
+}
+
+#languageSelect option {
+  background-color: #ffffff; /* 白色背景 */
+  color: #444444;
+  padding: a8px;
+}

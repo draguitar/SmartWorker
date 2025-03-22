@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/index3.css') }}"
+    />
+    <title>即時語音字幕+翻譯</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="text">
+          <img id="rec-icon" src="{{ url_for('static', filename='icons/rec.jpg') }}" 
+            style="width: 40px; height: auto; display:none">
+          <h1>會議記錄小助理</h1>
+        <p>Meeting record and translation</p>
+        <div style="display: none">
+          <p>Convert recorded audio to MP3:</p>
+          <select id="encodingTypeSelect">
+            <option value="wav">Waveform Audio (.wav)</option>
+            <option value="mp3" selected>MP3 Audio (.mp3)</option>
+          </select>
+          <ol id="recordingsList"></ol>
+        </div>
+          <p class="language-selection">
+            <label for="languageSelect" class="language-label">語言/Language:</label>
+            <select id="languageSelect" class="select-styled">
+              <option value="zh-TW">繁體中文</option>
+              <option value="en-US">English</option>
+              <option value="ja-JP">日本語</option>
+              <option value="ko-KR">한국어</option>
+            </select>
+            <a id="downloadTranscrLink" href="#" download="" class="download-link">Download</a>
+          </p>
+        </p>
+        <input id="sessionId" value="{{session_id}}" hidden/>
+      </div>
+      <div class="buttons">
+        <button class="btn-start active" id="recordButton">
+          開始錄音/Start
+        </button>
+        <button class="btn-stop disabled" id="stopButton" disabled>
+          停止錄音/Stop
+        </button>
+      </div>
+      <br />
+    </div>
+    <div id="log_container">
+      <div id="formats"></div>
+      <pre id="log"></pre>
+      <div id="summaryDiv"></div>
+    </div>
+
+    <!-- 發生錯誤 重新載入-->
+    <form id="form_err" action="/" method="GET" style="display: none">
+      <input id="err_msg" name="err_msg" />
+    </form>
+    <!--
+    <div id="speechContainer" style="display:none">
+        <br>
+        <h3>Step 3 - 上傳聲音</h3>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file"/>
+            <br>
+
+            <br>
+            <h3>Step 4 - 轉成文字 </h3>
+            <input type="submit" id="submitButton" value="轉檔"/>
+        </form>
+
+        {% if transcript != "" %}
+            <div id="speechTranscriptContainer">
+                <h1>Results</h1>
+                <p id="speechText">{{ transcript }}</p>
+            </div>
+        {% endif %}
+
+        {% if summary != "" %}
+            <div id="summaryContainer">
+                <h1>Summary</h1>
+                <p id="summary"><pre>{{ summary|safe }}</pre></p>
+            </div>
+        {% endif %}
+    </div>
+-->
+    <script src="{{ url_for('static', filename='js/WebAudioRecorder.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>

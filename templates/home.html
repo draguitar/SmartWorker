@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM功能庫 | 大型語言模型技術處理解決方案</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Microsoft JhengHei', Arial, sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, #93c5fd, #6ea8fe);
+    color: #1e293b;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.hero {
+    padding: 3rem 0;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 3rem 0;
+    justify-content: center;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 12px;
+    width: 300px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #bfdbfe, #93c5fd);
+    color: #1e3a8a;
+    font-size: 4rem;
+}
+
+.feature-content {
+    padding: 1.5rem;
+}
+
+.feature-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+}
+
+.feature-desc {
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #60a5fa;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: hsl(217, 97%, 55%);
+}
+
+footer {
+    background-color: #e0e7ff;
+    color: #1e293b;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-links {
+    margin: 1rem 0;
+}
+
+.footer-links a {
+    color: #4b5563;
+    margin: 0 0.5rem;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="hero">
+                <h1>LLM 功能庫</h1>
+                <p>人工智能驅動的文字處理解決方案</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="features">
+            <div class="feature-card" onclick="location.href='/index2'">
+                <div class="feature-icon">
+                    <span>🎙️</span>
+                </div>
+                <div class="feature-content">
+                    <h2 class="feature-title">會議錄音</h2>
+                    <p class="feature-desc">透過先進的LLM技術轉錄並分析您的會議內容，自動生成摘要和行動項目。</p>
+                    <a href="/index2" class="btn">開始使用</a>
+                </div>
+            </div>
+
+            <div class="feature-card" onclick="location.href='/ocr'">
+                <div class="feature-icon">
+                    <span>👁️</span>
+                </div>
+                <div class="feature-content">
+                    <h2 class="feature-title">文字光學辨識</h2>
+                    <p class="feature-desc">將圖片和掃描文件中的文字轉換為可編輯文本，LLM增強的OCR確保高準確度。</p>
+                    <a href="/ocr" class="btn">開始使用</a>
+                </div>
+            </div>
+
+            <div class="feature-card" onclick="location.href='#new-feature'">
+                <div class="feature-icon">
+                    <span>✨</span>
+                </div>
+                <div class="feature-content">
+                    <h2 class="feature-title">即將推出</h2>
+                    <p class="feature-desc">更多智能功能即將加入我們的LLM功能庫，敬請期待！</p>
+                    <a href="#new-feature" class="btn">了解更多</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2025 LLM功能庫 | ASECL IT Infrastructure Data Analysis</p>
+                <div class="footer-links">
+                    <a href="#">關於我們</a>
+                    <a href="#">隱私政策</a>
+                    <a href="#">使用條款</a>
+                    <a href="#">聯絡我們</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

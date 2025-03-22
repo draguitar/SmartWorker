@@ -1,0 +1,32 @@
+# 客戶站台
+https://eservices3.microchip.com/SLM/GenerateLotNumber
+https://eservices3.microchip.com/SLM/ViewLotInfo
+
+
+# Docker
+https://registry-1.docker.io
+https://index.docker.io
+https://auth.docker.io
+https://hub.docker.com
+https://production.cloudflare.docker.com
+
+
+# AI 分析
+https://api.groq.com/*
+https://generativelanguage.googleapis.com/*
+https://models.github.ai/*
+
+
+# CDN解析
+https://*.amazonaws.com
+https://*.cloudfront.net
+https://*.googleapis.com
+https://*.azureedge.net
+https://*.fastly.net
+
+# github
+https://github.com/*
+
+# Python
+https://pypi.org/simple/
+https://files.pythonhosted.org/
