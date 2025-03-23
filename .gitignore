@@ -6,6 +6,7 @@
 *.jpg
 *.jpeg
 *.png
+*.xlsx
 
 uploads/
 flask_session/

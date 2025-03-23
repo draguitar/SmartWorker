@@ -346,7 +346,7 @@
           formData.append("image", currentFile);
 
           // 發送到後端 API
-          fetch("/invoice", {
+          fetch("/ocr", {
             method: "POST",
             body: formData,
           })
